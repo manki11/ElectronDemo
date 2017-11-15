@@ -1,20 +1,20 @@
-const electron= require("electron");
-const app= electron.app;
+const electron = require("electron");
+const app = electron.app;
 
 const BrowserWindow = electron.BrowserWindow;
 
-const path=require('path');
-const url= require('url');
+const path = require('path');
+const url = require('url');
 
 let mainWindow;
 
-function createWindow(){
+function createWindow() {
     // create browser window
-    mainWindow= new BrowserWindow({width:800,height:600});
+    mainWindow = new BrowserWindow({width: 800, height: 600});
 
     //load index.html
     mainWindow.loadURL(url.format({
-        pathname:path.join(__dirname,'index.html'),
+        pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -44,3 +44,8 @@ app.on('activate', function () {
         createWindow();
     }
 });
+
+exports.openWindow = (filename) => {
+    let win = new BrowserWindow({width: 800, height: 600});
+    win.loadURL(`file://${__dirname}/` + filename + `.html`);
+};
